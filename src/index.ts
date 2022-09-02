@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 // func
-import compareRouter from "./Routers/compareRouter";
+import figtersRouter from "./Routers/figtersRouter";
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ server.use(cors());
 
 const PORT: any = process.env.PORT;
 
-server.use(compareRouter);
+server.use(figtersRouter);
 
 server.listen(PORT, () => {
   console.log(`It's alive on port ${PORT}`);

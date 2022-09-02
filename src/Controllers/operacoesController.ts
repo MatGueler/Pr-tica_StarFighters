@@ -1,20 +1,16 @@
 import { Request, Response } from "express";
-import joi from "joi";
-import axios from "axios";
+import * as services from "../Services/figtersService";
+
+export async function RankingUser(req: Request, res: Response) {
+  const result = await services.getAllFigters();
+  res.status(200).send(result);
+}
 
 export async function CompareUser(req: Request, res: Response) {
   const { firstUser, secondUser } = req.body;
 
-  const userSchema = joi.object({
-    firstUser: joi.string().required(),
-    secondUser: joi.string().required(),
-  });
+  const result = await services.compareStars(firstUser, secondUser);
 
-  let value: object[];
-
-  await axios
-    .get(`https://api.github.com/users/${firstUser}/repos`)
-    .then((response) => {
-      value = response.data;
-    });
+  // const result = await services.getAllFigters();
+  res.status(200).send(result);
 }
